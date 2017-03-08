@@ -1,5 +1,12 @@
 import nltk
+import nltk.grammar
+from nltk.grammar import read_grammar
 from nltk import tree, nonterminals, induce_pcfg
+
+from nltk.corpus import treebank
+from nltk import treetransforms
+from nltk.parse import pchart
+
 
 #==============================================================================
 # Grammar
@@ -84,15 +91,17 @@ data = loadData('parseTrees.txt')
 treeData = getTreeData(data)
 print ("done loading data\n\n")
 
-S = nltk.Nonterminal("S")
-allSubTreesProd = []
-for itms in treeData:
-    allSubTreesProd+=itms.productions()    
+start = nltk.Nonterminal("S")
+treeProduction = []
+for items in treeData:
+    rulesCFG = items.productions() 
+    treeProduction += rulesCFG
+print(treeProduction)
 
-grammar = nltk.induce_pcfg(S, allSubTreesProd)
-parser = nltk.InsideChartParser(grammar)
-
-#viterbi_parser = nltk.ViterbiParser(grammar)
-#viterbi_parser.trace(100)
+grammar = nltk.induce_pcfg(start, treeProduction)
+#parser = nltk.InsideChartParser(grammar)
+parser = nltk.ViterbiParser(grammar)
 for item in parser.parse((sentence).split()):
     print(item)
+
+print(parser)

@@ -13,16 +13,16 @@ S -> Aux NP VP
 S -> VP
 S -> IVP 
 
+NP -> NP PP
 NP -> Pronoun
 NP -> Proper-Noun
 NP -> Det Nominal 
 
-Nominal -> Noun 
+Nominal -> Noun
 Nominal -> Nominal Noun
 Nominal -> Nominal PP 
 
-IVP -> IVerb NP NP 
-IVerb ->  NP NP PP
+IVP -> IVerb NP NP | IVerb  NP NP PP
 
 VP -> V NP
 VP -> Verb
@@ -30,8 +30,6 @@ VP -> Verb NP
 VP -> Verb NP PP
 VP -> Verb PP
 VP -> VP PP
-
-verb -> VP
 
 PP -> Preposition NP
 
